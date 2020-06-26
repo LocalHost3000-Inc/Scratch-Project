@@ -4,11 +4,21 @@ import Search from "./Search.jsx";
 import { withRouter } from 'react-router-dom'
 
 
- class Home extends Component {
+class Home extends Component {
+  renderPage() {
+    const { currentUser } = this.props;
+
+    if (currentUser.name) {
+      return <Search />
+    } else {
+      return <Login addCurrentUser={this.props.addCurrentUser} history={this.props.history} />
+    }
+  }
+
   render() {
     return (
       <div>
-        <Login addCurrentUser={this.props.addCurrentUser} history={this.props.history} />
+        {this.renderPage()}
       </div>
     );
   }
