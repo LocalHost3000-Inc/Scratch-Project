@@ -29,6 +29,9 @@ class Login extends Component {
     this.props.history.push('/register');
     e.preventDefault();
   }
+  handlePasswordUsernameError(e) {
+    
+  }
   handleSubmitButton(e) {
     console.log('call to submit button')
     let url = 'http://localhost:8080/api/login';
@@ -42,13 +45,15 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log('call to .then')
+        if (data.err === 'user does not exist') return this.setState({errorMessage: 'incorrect username or password'}) 
         this.props.addCurrentUser(data);
         this.props.history.push('/');
       })
-      .catch((err) => {
-        console.warn(err);
-        this.setState({errorMessage: 'sorry, we could not process your username and password'})
-        
+      .catch((data) => {
+        console.log('inside catch')
+        console.log('data is ', data)     
+        this.setState({errorMessage: 'sorry there was an error processing your request'})    
       });
     this.setState({usernameInputField: '', passwordInputField: ''});
     e.preventDefault();
@@ -66,7 +71,7 @@ class Login extends Component {
               Submit
             </button>
             <p >Don't have an account? <Link to="/register" className='registerHere'>Register Here</Link></p>
-            <p>{this.state.errorMessage}</p>
+            <p className='error'>{this.state.errorMessage}</p>
         </form>
       </main>
     )
