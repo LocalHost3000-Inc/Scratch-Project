@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import "../styles/login.scss";
 
+// const loginLinkStyle = {
+//   'font-size': '50px',
+// }
+
 class Login extends Component {
   constructor() {
     super();
@@ -51,13 +55,6 @@ class Login extends Component {
     this.setState({ usernameInputField: "", passwordInputField: "" });
     e.preventDefault();
   }
-
-  checkLoginState() {
-    FB.getLoginStatus(function (response) {
-      statusChangeCallback(response);
-    });
-  }
-
   render() {
     return (
       <main className="loginBox">
@@ -84,7 +81,10 @@ class Login extends Component {
             Submit
           </button>
           <p>
-            Don't have an account? <Link to="/register">Register Here</Link>
+            Don't have an account?{" "}
+            <Link className="loginRegisterLink" to="/register">
+              Register Here
+            </Link>
           </p>
           <p>{this.state.errorMessage}</p>
         </form>
