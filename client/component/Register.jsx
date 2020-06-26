@@ -111,7 +111,7 @@ class Register extends Component {
           <button type="submit">Register</button>
         </form>
         <span>
-          Have an account? <Link to="/login">Login</Link>
+          Have an account? <Link to="/">Login</Link>
         </span>
       </div>
     );
