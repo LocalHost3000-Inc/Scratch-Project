@@ -8,6 +8,7 @@ class Profile extends Component {
 
   // function
   renderProfile() {
+    console.log(this.props.currentUser);
     if (this.props.currentUser.username && this.props.inEditMode === false) {
       return (
         <div>
@@ -47,47 +48,7 @@ class Profile extends Component {
 
   render() {
     //(if not in edit mode)
-    return (
-      <div>
-        <h1>PROFILE</h1>
-        {this.props.currentUser.username ? (
-          <div>
-            <ul>
-              <li>Username: {this.props.currentUser.username}</li>
-              <li>Email: {this.props.currentUser.email}</li>
-              <li>Home: {this.props.currentUser.home}</li>
-            </ul>
-            <button onClick={this.handleClick}>Edit Profile</button>
-          </div>
-        ) : null}
-      </div>
-    );
-
-    //if in edit mode
-    return (
-      <div>
-        <h1>EDIT PROFILE</h1>
-        {this.props.currentUser.username ? (
-          <div>
-            <ul>
-              <li>
-                Username: {this.props.currentUser.username}
-                <input></input>
-              </li>
-              <li>
-                Email: {this.props.currentUser.email}
-                <input></input>
-              </li>
-              <li>
-                Home: {this.props.currentUser.home}
-                <input></input>
-              </li>
-            </ul>
-            <button onClick={this.handleClick}>Edit Profile</button>
-          </div>
-        ) : null}
-      </div>
-    );
+    return <div>{this.renderProfile()}</div>;
   }
 }
 

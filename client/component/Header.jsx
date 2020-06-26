@@ -9,9 +9,9 @@ export default class Header extends Component {
     return (
       <header className='headerWrapper'>
         <div className='headerInnerDiv'>
-          <span class='spanOne'>Local</span>
-          <span class='spanTwo'>Host</span>
-          <span class='spanThree'> 3000</span>
+          <span className='spanOne'>Local</span>
+          <span className='spanTwo'>Host</span>
+          <span className='spanThree'> 3000</span>
         </div>
       </header>
     );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, withRouter, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import '../styles/login.scss';
 
 // const loginLinkStyle = {
@@ -29,6 +29,7 @@ class Login extends Component {
     this.props.history.push('/register');
     e.preventDefault();
   }
+  handlePasswordUsernameError(e) {}
   handleSubmitButton(e) {
     console.log('call to submit button');
     let url = 'http://localhost:8080/api/login';
@@ -42,21 +43,26 @@ class Login extends Component {
     })
       .then(res => res.json())
       .then(data => {
+        console.log('call to .then');
+        if (data.err === 'user does not exist')
+          return this.setState({ errorMessage: 'incorrect username or password' });
         this.props.addCurrentUser(data);
         this.props.history.push('/');
       })
       .catch(err => {
         console.warn(err);
-        this.setState({ errorMessage: 'sorry, we could not process your username and password' });
+        this.setState({
+          errorMessage: 'sorry, we could not process your username and password',
+        });
       });
     this.setState({ usernameInputField: '', passwordInputField: '' });
     e.preventDefault();
   }
   render() {
     return (
-      <main className='loginBox'>
+      <div className='login'>
         <h1>Login</h1>
-        <form id='loginForm'>
+        <form id='loginForm' onSubmit={this.handleSubmitButton}>
           <input
             placeholder='username'
             name='usernameInputField'
@@ -69,18 +75,15 @@ class Login extends Component {
             value={this.state.passwordInputField}
             onChange={this.handlePasswordInputField}
           ></input>
-          <button form='loginForm' type='submit' value='Submit' onClick={this.handleSubmitButton}>
+          <button form='loginForm' type='submit' value='Submit'>
             Submit
           </button>
-          <p>
-            Don't have an account?{' '}
-            <Link className='loginRegisterLink' to='/register'>
-              Register Here
-            </Link>
-          </p>
-          <p>{this.state.errorMessage}</p>
         </form>
-      </main>
+        <span>
+          Don't have an account? <Link to='/register'>Register Here</Link>
+        </span>
+        <p>{this.state.errorMessage}</p>
+      </div>
     );
   }
 }

@@ -10,15 +10,7 @@ export default class App extends Component {
     super();
 
     this.state = {
-      currentUser: {
-        id: 5,
-        username: 'test',
-        password: 'test2',
-        name: 't1',
-        home: 'JPN',
-        email: 't1@t1.com',
-        type: 'traveler',
-      },
+      currentUser: {},
       inEditMode: false,
     };
 
@@ -26,7 +18,7 @@ export default class App extends Component {
   }
 
   addCurrentUser(user) {
-    this.setState({ currentUser: user });
+    this.setState({ currentUser: user }, () => console.log(this.state.currentUser));
   }
 
   editProfile() {
@@ -41,13 +33,25 @@ export default class App extends Component {
         <Router>
           <Header />
           <Switch>
-            <Route exact path='/' component={Home} />
+            <Route
+              exact
+              path='/'
+              component={() => (
+                <Home currentUser={this.state.currentUser} addCurrentUser={this.addCurrentUser} />
+              )}
+            />
             <Route
               exact
               path='/register'
               component={() => <Register addCurrentUser={this.addCurrentUser} />}
             />
-            <Route exact path='/profile' component={Profile} />
+            <Route
+              exact
+              path='/profile'
+              component={() => (
+                <Profile inEditMode={this.state.inEditMode} currentUser={this.state.currentUser} />
+              )}
+            />
           </Switch>
         </Router>
       </div>

@@ -16,9 +16,10 @@ router.get('/', (req, res) =>
 // A Router instance is a complete middleware and routing system;
 // for this reason, it is often referred to as a “mini-app”.
 
-router.post('/register', userController.createUser, (req, res) => {
+router.post('/register', userController.createUser, userController.login, (req, res) => {
   console.log('Successful post to database (/register route). ');
-  return res.status(200).json({});
+  console.log(res.locals.user);
+  return res.status(200).json(res.locals.user);
 });
 
 router.post('/login', userController.login, (req, res) => {
@@ -33,7 +34,14 @@ router.get('/profile/:id', userController.getProfile, (req, res) => {
 
 router.delete('/profile/:id', userController.deleteProfile, (req, res) => {
   console.log('Successful delete of profile');
-  return res.status(200).json({});
+  return res.status(200).json({
+    message: 'PROFILE DELETED',
+  });
+});
+
+router.put('/profile/:id', userController.updateProfile, (req, res) => {
+  console.log('Successful update of profile');
+  return res.status(200).json(res.locals.user);
 });
 
 module.exports = router;
