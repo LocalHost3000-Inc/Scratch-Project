@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 
 .registrationform {
@@ -22,6 +23,11 @@ button {
   border: 1px solid grey;
   margin-bottom: 10px;
   min-width: 200px;
+}
+
+.registerLoginLink {
+  color: C85137;
+  padding-top: 100px;
 }
 
 /* .registrationform select {
