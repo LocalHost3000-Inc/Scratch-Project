@@ -10,7 +10,13 @@ export default class Nav extends Component {
             <Link to='/register'>REGISTER</Link>
           </li>
           <li>
+            <Link to='/search'>SEARCH</Link>
+          </li>
+          <li>
             <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
           </li>
         </ul>
       </div>

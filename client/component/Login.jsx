@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
-import "../styles/login.scss";
+import React, { Component } from 'react';
+import { Link, withRouter, Redirect } from 'react-router-dom';
+import '../styles/login.scss';
 
 class Login extends Component {
   constructor() {
@@ -8,25 +8,25 @@ class Login extends Component {
     this.state = {
       usernameInputField: '',
       passwordInputField: '',
-      errorMessage: ''
-    }
+      errorMessage: '',
+    };
     this.handleUsernameInputField = this.handleUsernameInputField.bind(this);
     this.handlePasswordInputField = this.handlePasswordInputField.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
     this.handleSignUpButton = this.handleSignUpButton.bind(this);
   }
   handleUsernameInputField(e) {
-    this.setState({usernameInputField: e.target.value})
+    this.setState({ usernameInputField: e.target.value });
   }
   handlePasswordInputField(e) {
-    this.setState({passwordInputField: e.target.value})
+    this.setState({ passwordInputField: e.target.value });
   }
   handleSignUpButton(e) {
     this.props.history.push('/register');
     e.preventDefault();
   }
   handleSubmitButton(e) {
-    console.log('call to submit button')
+    console.log('call to submit button');
     let url = 'http://localhost:8080/api/login';
     fetch(url, {
       method: 'POST',
@@ -36,36 +36,45 @@ class Login extends Component {
         password: this.state.passwordInputField,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => {
+      .then(res => res.json())
+      .then(data => {
         this.props.addCurrentUser(data);
         this.props.history.push('/');
       })
-      .catch((err) => {
+      .catch(err => {
         console.warn(err);
-        this.setState({errorMessage: 'sorry, we could not process your username and password'})
-        
+        this.setState({ errorMessage: 'sorry, we could not process your username and password' });
       });
-    this.setState({usernameInputField: '', passwordInputField: ''});
+    this.setState({ usernameInputField: '', passwordInputField: '' });
     e.preventDefault();
   }
   render() {
     return (
-      <main className ='loginBox'>
+      <main className='loginBox'>
         <h1>Login</h1>
         <form id='loginForm'>
-            <input placeholder='username' name='usernameInputField' value={this.state.usernameInputField} onChange={this.handleUsernameInputField}>
-            </input>
-            <input placeholder='password'name='passwordInputField' value={this.state.passwordInputField} onChange={this.handlePasswordInputField}>
-            </input>
-            <button form='loginForm' type='submit'  value='Submit' onClick={this.handleSubmitButton}>
-              Submit
-            </button>
-            <p>Don't have an account? <Link to="/register">Register Here</Link></p>
-            <p>{this.state.errorMessage}</p>
+          <input
+            placeholder='username'
+            name='usernameInputField'
+            value={this.state.usernameInputField}
+            onChange={this.handleUsernameInputField}
+          ></input>
+          <input
+            placeholder='password'
+            name='passwordInputField'
+            value={this.state.passwordInputField}
+            onChange={this.handlePasswordInputField}
+          ></input>
+          <button form='loginForm' type='submit' value='Submit' onClick={this.handleSubmitButton}>
+            Submit
+          </button>
+          <p>
+            Don't have an account? <Link to='/register'>Register Here</Link>
+          </p>
+          <p>{this.state.errorMessage}</p>
         </form>
       </main>
-    )
+    );
   }
 }
 

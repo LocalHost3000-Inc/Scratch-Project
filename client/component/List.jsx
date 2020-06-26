@@ -11,7 +11,7 @@ class List extends Component {
     const items = [];
     for (let user of this.props.searchResults) {
       items.push(
-        <Item username={user.username} name={user.name} email={user.email} country={user.country} />
+        <Item username={user.username} name={user.name} email={user.email} home={user.home} />
       );
     }
     return <div>{items}</div>;
