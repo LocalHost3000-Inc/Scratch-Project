@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/register.css";
 
 class Register extends Component {
@@ -118,4 +118,4 @@ class Register extends Component {
   }
 }
 
-export default withRouter(Register);
+export default Register;
