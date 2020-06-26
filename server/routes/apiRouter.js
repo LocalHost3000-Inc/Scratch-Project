@@ -31,7 +31,12 @@ router.get('/profile/:id', userController.getProfile, (req, res) => {
 
 router.delete('/profile/:id', userController.deleteProfile, (req, res) => {
   console.log('Successful delete of profile');
-  return res.status(200).json({});
+  return res.status(200).json({message: 'PROFILE DELETED'});
+})
+
+router.put('/profile/:id', userController.updateProfile, (req, res) =>{
+  console.log('Successful update of profile');
+  return res.status(200).json(res.locals.user)
 })
 
 module.exports = router;

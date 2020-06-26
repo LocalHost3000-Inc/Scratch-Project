@@ -27,7 +27,7 @@ CREATE TABLE user_info (
 ;
 
 dummy instance: 
-{"username": "test", "password": "test2", "name": "t1", "home": "home1", }
+{"username": "test", "password": "test2", "name": "t1", "home": "home1", "email": "jerkface1@jerk.edu", "type": "traveler" }
 */
 
 
@@ -86,8 +86,40 @@ userController.getProfile = (req, res, next) => {
 }
 
 userController.deleteProfile = (req, res, next) => {
+    console.log("Inside userController.deleteProfile.")
     const query = `DELETE FROM user_info WHERE id='${req.params.id}';`;
+    db.query(query).then(data => {
+        console.log("Deleting User's information");
+        return next();
+    }).catch(err => {
+        console.log("Error in userController.getProfile: ", err);
+        return next(err);
+    }) 
 }
 
+userController.updateProfile = (req, res, next) => {
+    console.log("Inside userController.updateProfile")
+    console.log('REQ DAT BODY', req.body);
+
+    // req.body {"name": test, "home": USA}
+        const allKeys = Object.keys(req.body);
+        const allValues =  Object.values(req.body);
+
+        for (let i = 0; i < allKeys.length; i++){
+            let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
+
+            db.query(query).then(data => {
+                res.locals.user = data.rows;
+                return next()
+            }).catch(err => {
+                console.log("Error in userController.updateProfile", err);
+                return next(err)
+            })
+        }
+
+    // const query = `UPDATE user_info
+    //                SET 
+    //                WHERE id='${req.params.id}';`;
+}
 
 module.exports = userController;
