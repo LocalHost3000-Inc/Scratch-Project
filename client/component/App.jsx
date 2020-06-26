@@ -52,7 +52,11 @@ export default class App extends Component {
               exact
               path='/profile'
               component={() => (
-                <Profile editProfile={this.editProfile} currentUser={this.state.currentUser} />
+                <Profile
+                  inEditMode={this.state.inEditMode}
+                  editProfile={this.editProfile}
+                  currentUser={this.state.currentUser}
+                />
               )}
             />
             <Route exact path='/search' component={Search} />
