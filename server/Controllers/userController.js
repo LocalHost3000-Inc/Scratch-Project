@@ -1,4 +1,4 @@
-const db = require('../models/userInfoModels')
+const db = require('../models/userInfoModels');
 //const { ResolvePlugin } = require('webpack')
 const userController = {};
 
@@ -25,9 +25,13 @@ CREATE TABLE user_info (
     type varchar(255)
 )
 ;
+
+dummy instance: 
+{"username": "test", "password": "test2", "name": "t1", "home": "home1"}
 */
 
 userController.createUser = (req, res, next) => {
+    console.log('CREATE USER CALLED')
     let {username, password, name, home, email, type} = req.body;
 
     let arr = [username, password, name, home, email, type];

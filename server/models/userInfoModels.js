@@ -1,5 +1,4 @@
-const { pool } = require('pg')
-
+const { Pool } = require('pg')
 // pool to manage our connections to the database (has a few advantages). 
 // There is overhead in establishing new connections to the database that we don't want to wait on for every single query we send. 
 // Having a pool of connections at the ready makes our database queries more performant.
