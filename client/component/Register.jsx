@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "../styles/register.scss";
 
 class Register extends Component {
@@ -46,7 +46,6 @@ class Register extends Component {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           this.props.addCurrentUser(data);
           this.props.history.push("/");
         })
@@ -121,4 +120,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default withRouter(Register);

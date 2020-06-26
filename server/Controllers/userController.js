@@ -45,6 +45,7 @@ userController.createUser = (req, res, next) => {
     const query = 'INSERT INTO user_info (username, password, name, home, email, type) VALUES ($1, $2, $3, $4, $5, $6)';
 
     db.query(query, arr).then(data => {
+        console.log(data)
         return next();
     }).catch(err => {
         console.log("Error in userController.createUser: ", err);
@@ -64,7 +65,7 @@ userController.login = (req, res, next) => {
 
     db.query(query).then(data => {
         if (data.rows.length > 0) {
-            res.locals.user = data.rows;
+            res.locals.user = data.rows[0];
             return next();
         } else(next({
             log: 'user does not exist',
