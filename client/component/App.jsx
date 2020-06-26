@@ -11,8 +11,17 @@ export default class App extends Component {
 
     this.state = {
       currentUser: {},
+      inEditMode = false;
     };
   }
+  
+  editProfile() {
+    this.setState(inEditMode = true)
+    // this.setState({...currentUser, user)
+    fetch('/api/profile/:id')
+  }
+
+ 
 
   render() {
     return (
@@ -22,7 +31,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/register" component={Register} />
-            <Route exact path="/profile" component={Profile} />
+            <Route exact path="/profile" component={Profile} editProfile={this.editProfile} currentUser={this.state.currentUser}/>
           </Switch>
         </Router>
       </div>
