@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import "../styles/login.scss";
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/login.scss';
 
 // const loginLinkStyle = {
 //   'font-size': '50px',
@@ -10,9 +10,9 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      usernameInputField: "",
-      passwordInputField: "",
-      errorMessage: "",
+      usernameInputField: '',
+      passwordInputField: '',
+      errorMessage: '',
     };
     this.handleUsernameInputField = this.handleUsernameInputField.bind(this);
     this.handlePasswordInputField = this.handlePasswordInputField.bind(this);
@@ -26,65 +26,64 @@ class Login extends Component {
     this.setState({ passwordInputField: e.target.value });
   }
   handleSignUpButton(e) {
-    this.props.history.push("/register");
+    this.props.history.push('/register');
     e.preventDefault();
   }
-  handlePasswordUsernameError(e) {
-    
-  }
+  handlePasswordUsernameError(e) {}
   handleSubmitButton(e) {
-    console.log("call to submit button");
-    let url = "http://localhost:8080/api/login";
+    console.log('call to submit button');
+    let url = 'http://localhost:8080/api/login';
     fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         username: this.state.usernameInputField,
         password: this.state.passwordInputField,
       }),
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log('call to .then')
-        if (data.err === 'user does not exist') return this.setState({errorMessage: 'incorrect username or password'}) 
+      .then(res => res.json())
+      .then(data => {
+        console.log('call to .then');
+        if (data.err === 'user does not exist')
+          return this.setState({ errorMessage: 'incorrect username or password' });
         this.props.addCurrentUser(data);
-        this.props.history.push("/");
+        this.props.history.push('/');
       })
-      .catch((err) => {
+      .catch(err => {
         console.warn(err);
         this.setState({
-          errorMessage:
-            "sorry, we could not process your username and password",
+          errorMessage: 'sorry, we could not process your username and password',
         });
       });
-    this.setState({ usernameInputField: "", passwordInputField: "" });
+    this.setState({ usernameInputField: '', passwordInputField: '' });
     e.preventDefault();
   }
   render() {
     return (
-      <div className="login">
+      <div className='login'>
         <h1>Login</h1>
-        <form id="loginForm" onSubmit={this.handleSubmitButton}>
+        <form id='loginForm' onSubmit={this.handleSubmitButton}>
           <input
-            placeholder="username"
-            name="usernameInputField"
+            placeholder='username'
+            name='usernameInputField'
             value={this.state.usernameInputField}
             onChange={this.handleUsernameInputField}
           ></input>
           <input
-            placeholder="password"
-            name="passwordInputField"
+            placeholder='password'
+            name='passwordInputField'
             value={this.state.passwordInputField}
             onChange={this.handlePasswordInputField}
           ></input>
-          <button form="loginForm" type="submit" value="Submit">
+          <button form='loginForm' type='submit' value='Submit'>
             Submit
           </button>
         </form>
         <span>
-          Don't have an account? <Link to="/register">Register Here</Link>
+          Don't have an account? 
         </span>
-        <p>{this.state.errorMessage}</p>
+        <Link className='registerHere' to="/register">Register Here</Link>
+        <p className='error'>{this.state.errorMessage}</p>
       </div>
     );
   }
