@@ -1,34 +1,41 @@
-.registration {
+.register {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-family: Roboto, Helvetica Neue, sans-serif;
+  font-weight: 300;
+  
+  h1 {
+    font-weight: 300;
+  }
+
+  .registrationform {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 90%;
+    // padding: 10px;
+  }
+
+  input, select, button {
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    padding: 5px;
+    margin-bottom: 10px;
+    min-width: 200px;
+    font-weight: 200;
+  }
+  .registerLoginLink {
+    color: C85137;
+  }
 }
 
-.registrationform {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 90%;
-  padding: 10px;
-}
 
-.registrationform input,
-select,
-button {
-  padding: 5px;
-  border-radius: 5px;
-  border: 1px solid grey;
-  margin-bottom: 10px;
-  min-width: 200px;
-}
 
-.registerLoginLink {
-  color: C85137;
-  padding-top: 100px;
-}
+
+
+
 
 /* .registrationform select {
   width: 150px;

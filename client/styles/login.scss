@@ -1,28 +1,38 @@
-.loginBox {
+.login {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 200px;
+  width: 200px;
   margin: auto;
   font-family: Roboto, Helvetica Neue, sans-serif;
+  font-weight: 300;
+  
+  button, input {
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    display: block;
+    font-weight: 200;
+    padding: 5px;
+  }
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  h1 {
+    font-weight: 300;
+  }
+  p {
+    font-weight: 300;
+    text-align: center;
+  } 
+  .registerHere {
+    color: C85137;
+  }
 }
-button {
-  display: block;
-}
-input {
-  display: block;
-  margin-bottom: 10px;
-  padding: 5px;
-}
-form {
-  display: flex;
-  flex-direction: column;
-}
-p {
-  text-align: center;
-}
-.loginRegisterLink {
-  color: C85137;
-  padding-top: 100px;
-}
+
+
+
