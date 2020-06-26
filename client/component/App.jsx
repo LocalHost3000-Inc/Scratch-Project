@@ -12,6 +12,12 @@ export default class App extends Component {
     this.state = {
       currentUser: {},
     };
+
+    this.addCurrentUser = this.addCurrentUser.bind(this);
+  }
+
+  addCurrentUser(user) {
+    this.setState({ currentUser: user });
   }
 
   render() {
@@ -21,7 +27,13 @@ export default class App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/register" component={Register} />
+            <Route
+              exact
+              path="/register"
+              component={() => (
+                <Register addCurrentUser={this.addCurrentUser} />
+              )}
+            />
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </Router>
