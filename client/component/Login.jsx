@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link, withRouter, Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -11,12 +12,17 @@ class Login extends Component {
     this.handleUsernameInputField = this.handleUsernameInputField.bind(this);
     this.handlePasswordInputField = this.handlePasswordInputField.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
+    this.handleSignUpButton = this.handleSignUpButton.bind(this);
   }
   handleUsernameInputField(e) {
     this.setState({usernameInputField: e.target.value})
   }
   handlePasswordInputField(e) {
     this.setState({passwordInputField: e.target.value})
+  }
+  handleSignUpButton(e) {
+    this.props.history.push('/register');
+    e.preventDefault();
   }
   handleSubmitButton(e) {
     console.log('call to submit button')
@@ -58,6 +64,7 @@ class Login extends Component {
               Submit
             </button>
           </div>
+            Don't have an account? <Link to="/register">Register Here</Link>
           <div>
             <p>{this.state.errorMessage}</p>
           </div>
