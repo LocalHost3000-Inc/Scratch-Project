@@ -6,7 +6,7 @@ export default class Home extends Component {
   render() {
     return (
       <div>
-        <Login />
+        <Login addCurrentUser={this.props.addCurrentUser}/>
       </div>
     );
   }
