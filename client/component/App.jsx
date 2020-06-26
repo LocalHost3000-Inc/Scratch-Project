@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./Register.jsx";
 import Profile from "./Profile.jsx";
 import Home from "./Home.jsx";
@@ -13,6 +13,12 @@ export default class App extends Component {
       currentUser: {},
       inEditMode = false;
     };
+
+    this.addCurrentUser = this.addCurrentUser.bind(this);
+  }
+
+  addCurrentUser(user) {
+    this.setState({ currentUser: user });
   }
   
   editProfile() {
