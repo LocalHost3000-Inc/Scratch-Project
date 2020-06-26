@@ -16,6 +16,21 @@ export default class App extends Component {
     this.addCurrentUser = this.addCurrentUser.bind(this);
   }
 
+  componentDidMount() {
+    FB.getLoginStatus((response) => {
+      //   {
+      //     status: 'connected',
+      //     authResponse: {
+      //         accessToken: '...',
+      //         expiresIn:'...',
+      //         signedRequest:'...',
+      //         userID:'...'
+      //     }
+      // }
+      statusChangeCallback(response);
+    });
+  }
+
   addCurrentUser(user) {
     this.setState({ currentUser: user });
   }
