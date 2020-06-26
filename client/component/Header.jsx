@@ -17,10 +17,10 @@ export default class Header extends Component {
         </div>
         <div className="buttonsDiv">
           <button className='searchButton'>
-            <p>Search</p>
+            Search
           </button>
           <button>
-            <p>Profile</p>
+            Profile
           </button>
         </div>
       </header>

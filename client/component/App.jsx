@@ -4,6 +4,7 @@ import Register from "./Register.jsx";
 import Profile from "./Profile.jsx";
 import Home from "./Home.jsx";
 import Header from "./Header.jsx";
+import '../styles/app.scss';
 
 export default class App extends Component {
   constructor() {
@@ -22,7 +23,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='app'>
         <Router>
           <Header />
           <Switch>
