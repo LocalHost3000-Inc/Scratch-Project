@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "../styles/register.css";
+import "../styles/register.scss";
 
 class Register extends Component {
   constructor(props) {
