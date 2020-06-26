@@ -26,9 +26,9 @@ export default class App extends Component {
         <Router>
           <Header />
           <Switch>
-            <Route 
-            exact path="/" 
-            component={() => (<Home addCurrentUser={this.addCurrentUser} />)}
+            <Route
+              exact path="/"
+              component={() => (<Home currentUser={this.state.currentUser} addCurrentUser={this.addCurrentUser} />)}
             />
             <Route
               exact
