@@ -16,4 +16,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../index.html'));
 });
 
+//Global route handler
+
 app.listen(3000, () => console.log('Listening on port 3000'));
