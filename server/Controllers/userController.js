@@ -102,14 +102,24 @@ userController.updateProfile = (req, res, next) => {
     console.log('REQ DAT BODY', req.body);
 
     // req.body {"name": test, "home": USA}
-    /*
-        allKeys = Object.keys(req.body);
-        allValues =  Object.values(req.body);
-    */
+        const allKeys = Object.keys(req.body);
+        const allValues =  Object.values(req.body);
 
-    const query = `UPDATE user_info
-                   SET 
-                   WHERE ID='${req.params.id}';`;
+        for (let i = 0; i < allKeys.length; i++){
+            let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
+
+            db.query(query).then(data => {
+                res.locals.user = data.rows;
+                return next()
+            }).catch(err => {
+                console.log("Error in userController.updateProfile", err);
+                return next(err)
+            })
+        }
+
+    // const query = `UPDATE user_info
+    //                SET 
+    //                WHERE id='${req.params.id}';`;
 }
 
 module.exports = userController;
