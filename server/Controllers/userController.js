@@ -116,10 +116,6 @@ userController.updateProfile = (req, res, next) => {
                 return next(err)
             })
         }
-
-    // const query = `UPDATE user_info
-    //                SET 
-    //                WHERE id='${req.params.id}';`;
 }
 
 module.exports = userController;
