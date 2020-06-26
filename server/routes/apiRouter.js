@@ -29,4 +29,9 @@ router.get('/profile/:id', userController.getProfile, (req, res) => {
   return res.status(200).json(res.locals.user);
 })
 
+router.delete('/profile/:id', userController.deleteProfile, (req, res) => {
+  console.log('Successful delete of profile');
+  return res.status(200).json({});
+})
+
 module.exports = router;

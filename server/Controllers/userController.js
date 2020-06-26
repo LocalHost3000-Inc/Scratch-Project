@@ -30,19 +30,6 @@ dummy instance:
 {"username": "test", "password": "test2", "name": "t1", "home": "home1", }
 */
 
-userController.getProfile = (req, res, next) => {
-    console.log("Inside userController.getProfile.");
-    // console.log("req.body, get profile: ", req.params)
-    const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
-    db.query(query).then(data => {
-        res.locals.user = data.rows;
-        return next()
-    }).catch(err => {
-        console.log("Error in userController.getProfile: ", err);
-        return next(err);
-    }) 
-}
-
 
 userController.createUser = (req, res, next) => {
 
@@ -68,13 +55,39 @@ userController.login = (req, res, next) => {
     const query = `SELECT * FROM user_info WHERE username='${username}' AND password='${password}';`;
 
     db.query(query).then(data => {
-        res.locals.user = data.rows;
-        return next();
+        if (data.rows.length > 0) {
+            res.locals.user = data.rows;
+            return next();
+        } else (next({
+            log: 'user does not exist',
+            status: 400,
+            message: {
+                err: 'user does not exist'
+            }
+        }))
     }).catch(err => {
         console.log("Error in userController.createUser: ", err);
         return next(err);
     })
     //res -> would be every column (data) from that user. 
 }
+
+userController.getProfile = (req, res, next) => {
+    console.log("Inside userController.getProfile.");
+    // console.log("req.body, get profile: ", req.params)
+    const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
+    db.query(query).then(data => {
+        res.locals.user = data.rows;
+        return next()
+    }).catch(err => {
+        console.log("Error in userController.getProfile: ", err);
+        return next(err);
+    }) 
+}
+
+userController.deleteProfile = (req, res, next) => {
+    const query = `DELETE FROM user_info WHERE id='${req.params.id}';`;
+}
+
 
 module.exports = userController;
