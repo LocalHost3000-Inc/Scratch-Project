@@ -99,15 +99,12 @@ userController.deleteProfile = (req, res, next) => {
 
 userController.updateProfile = (req, res, next) => {
     console.log("Inside userController.updateProfile")
-    console.log('REQ DAT BODY', req.body);
-
-    // req.body {"name": test, "home": USA}
         const allKeys = Object.keys(req.body);
         const allValues =  Object.values(req.body);
 
         for (let i = 0; i < allKeys.length; i++){
             let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
-
+            
             db.query(query).then(data => {
                 res.locals.user = data.rows;
                 return next()
@@ -116,10 +113,6 @@ userController.updateProfile = (req, res, next) => {
                 return next(err)
             })
         }
-
-    // const query = `UPDATE user_info
-    //                SET 
-    //                WHERE id='${req.params.id}';`;
 }
 
 module.exports = userController;
