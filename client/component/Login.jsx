@@ -54,6 +54,7 @@ class Login extends Component {
   }
   render() {
     return (
+<<<<<<< HEAD
       <main className='loginBox'>
         <h1>Login</h1>
         <form id='loginForm'>
@@ -79,6 +80,20 @@ class Login extends Component {
             </Link>
           </p>
           <p>{this.state.errorMessage}</p>
+=======
+      <main className ='login'>
+        <h1>Login</h1>
+        <form id='loginForm'>
+            <input placeholder='username' name='usernameInputField' value={this.state.usernameInputField} onChange={this.handleUsernameInputField}>
+            </input>
+            <input placeholder='password'name='passwordInputField' value={this.state.passwordInputField} onChange={this.handlePasswordInputField}>
+            </input>
+            <button form='loginForm' type='submit'  value='Submit' onClick={this.handleSubmitButton}>
+              Submit
+            </button>
+            <p >Don't have an account? <Link to="/register" className='registerHere'>Register Here</Link></p>
+            <p>{this.state.errorMessage}</p>
+>>>>>>> 8105f02b615ccfccb0e1056f63940b872b73a967
         </form>
       </main>
     );
