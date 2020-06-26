@@ -24,6 +24,20 @@ router.post('/register', userController.createUser, (req, res) => {
 router.post('/login', userController.login, (req, res) => {
   console.log('Successful post to database (/login route).');
   return res.status(200).json(res.locals.user);
+<<<<<<< HEAD
 });
+=======
+})
+
+router.get('/profile/:id', userController.getProfile, (req, res) => {
+  console.log('Successful get to database (/profile:id route).')
+  return res.status(200).json(res.locals.user);
+})
+
+router.delete('/profile/:id', userController.deleteProfile, (req, res) => {
+  console.log('Successful delete of profile');
+  return res.status(200).json({});
+})
+>>>>>>> master
 
 module.exports = router;

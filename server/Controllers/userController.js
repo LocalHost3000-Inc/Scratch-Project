@@ -59,10 +59,27 @@ userController.login = (req, res, next) => {
   // let arr = [username, password];
   const query = `SELECT * FROM user_info WHERE username='${username}' AND password='${password}';`;
 
+<<<<<<< HEAD
   db.query(query)
     .then(data => {
       res.locals.user = data.rows;
       return next();
+=======
+    db.query(query).then(data => {
+        if (data.rows.length > 0) {
+            res.locals.user = data.rows;
+            return next();
+        } else (next({
+            log: 'user does not exist',
+            status: 400,
+            message: {
+                err: 'user does not exist'
+            }
+        }))
+    }).catch(err => {
+        console.log("Error in userController.createUser: ", err);
+        return next(err);
+>>>>>>> master
     })
     .catch(err => {
       console.log('Error in userController.createUser: ', err);
@@ -71,4 +88,26 @@ userController.login = (req, res, next) => {
   //res -> would be every column (data) from that user.
 };
 
+<<<<<<< HEAD
 module.exports = userController;
+=======
+userController.getProfile = (req, res, next) => {
+    console.log("Inside userController.getProfile.");
+    // console.log("req.body, get profile: ", req.params)
+    const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
+    db.query(query).then(data => {
+        res.locals.user = data.rows;
+        return next()
+    }).catch(err => {
+        console.log("Error in userController.getProfile: ", err);
+        return next(err);
+    }) 
+}
+
+userController.deleteProfile = (req, res, next) => {
+    const query = `DELETE FROM user_info WHERE id='${req.params.id}';`;
+}
+
+
+module.exports = userController;
+>>>>>>> master
