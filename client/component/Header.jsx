@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import '../styles/header.scss';
 
 export default class Header extends Component {
   constructor() {
@@ -6,8 +7,8 @@ export default class Header extends Component {
   }
   render() {
     return (
-      <header>
-        <span>Local</span><span>Host</span><span>3000</span>
+      <header className='headerWrapper'>
+        <div className='headerInnerDiv'><span class='spanOne'>Local</span><span class='spanTwo'>Host</span><span class='spanThree'> 3000</span></div>
       </header>
     )
   }
