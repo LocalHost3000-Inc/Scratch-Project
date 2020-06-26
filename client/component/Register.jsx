@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
+import "../styles/register.css";
 
 class Register extends Component {
   constructor(props) {
@@ -32,7 +33,7 @@ class Register extends Component {
     e.preventDefault();
 
     if (this.state.password === this.state.confirmPassword) {
-      fetch("http://localhost:8080/api/login", {
+      fetch("http://localhost:8080/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -50,14 +51,17 @@ class Register extends Component {
           this.props.history.push("/");
         })
         .catch((err) => console.warn(err));
+    } else {
+      this.setState({ error: "Please check password again" });
     }
   }
 
   render() {
     return (
-      <div>
+      <div className="registration">
         <h1>Register</h1>
-        <form onSubmit={this.handleSubmit}>
+        <span>{this.state.error ? this.state.error : " "}</span>
+        <form onSubmit={this.handleSubmit} className="registrationform">
           <select onChange={this.handleSelect}>
             <option value="Traveler">Traveler</option>
             <option value="Local">Local</option>
