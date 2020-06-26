@@ -32,14 +32,20 @@ dummy instance:
 
 
 userController.createUser = (req, res, next) => {
-
-    let {username, password, name, home, email, type} = req.body;
-
+    let {
+        username,
+        password,
+        name,
+        home,
+        email,
+        type
+    } = req.body;
     let arr = [username, password, name, home, email, type];
 
     const query = 'INSERT INTO user_info (username, password, name, home, email, type) VALUES ($1, $2, $3, $4, $5, $6)';
-    
+
     db.query(query, arr).then(data => {
+        console.log(data)
         return next();
     }).catch(err => {
         console.log("Error in userController.createUser: ", err);
@@ -50,15 +56,18 @@ userController.createUser = (req, res, next) => {
 userController.login = (req, res, next) => {
     //req -> matching username and paxwssword with data from database
     // console.log("req.body in userController: ", req);
-    let {username, password} = req.body
+    let {
+        username,
+        password
+    } = req.body
     // let arr = [username, password];
     const query = `SELECT * FROM user_info WHERE username='${username}' AND password='${password}';`;
 
     db.query(query).then(data => {
         if (data.rows.length > 0) {
-            res.locals.user = data.rows;
+            res.locals.user = data.rows[0];
             return next();
-        } else (next({
+        } else(next({
             log: 'user does not exist',
             status: 400,
             message: {
@@ -82,7 +91,7 @@ userController.getProfile = (req, res, next) => {
     }).catch(err => {
         console.log("Error in userController.getProfile: ", err);
         return next(err);
-    }) 
+    })
 }
 
 userController.deleteProfile = (req, res, next) => {
@@ -94,7 +103,7 @@ userController.deleteProfile = (req, res, next) => {
     }).catch(err => {
         console.log("Error in userController.getProfile: ", err);
         return next(err);
-    }) 
+    })
 }
 
 userController.updateProfile = (req, res, next) => {
@@ -102,20 +111,20 @@ userController.updateProfile = (req, res, next) => {
     console.log('REQ DAT BODY', req.body);
 
     // req.body {"name": test, "home": USA}
-        const allKeys = Object.keys(req.body);
-        const allValues =  Object.values(req.body);
+    const allKeys = Object.keys(req.body);
+    const allValues = Object.values(req.body);
 
-        for (let i = 0; i < allKeys.length; i++){
-            let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
+    for (let i = 0; i < allKeys.length; i++) {
+        let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
 
-            db.query(query).then(data => {
-                res.locals.user = data.rows;
-                return next()
-            }).catch(err => {
-                console.log("Error in userController.updateProfile", err);
-                return next(err)
-            })
-        }
+        db.query(query).then(data => {
+            res.locals.user = data.rows;
+            return next()
+        }).catch(err => {
+            console.log("Error in userController.updateProfile", err);
+            return next(err)
+        })
+    }
 
     // const query = `UPDATE user_info
     //                SET 
