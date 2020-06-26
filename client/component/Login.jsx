@@ -29,6 +29,9 @@ class Login extends Component {
     this.props.history.push("/register");
     e.preventDefault();
   }
+  handlePasswordUsernameError(e) {
+    
+  }
   handleSubmitButton(e) {
     console.log("call to submit button");
     let url = "http://localhost:8080/api/login";
@@ -42,6 +45,8 @@ class Login extends Component {
     })
       .then((res) => res.json())
       .then((data) => {
+        console.log('call to .then')
+        if (data.err === 'user does not exist') return this.setState({errorMessage: 'incorrect username or password'}) 
         this.props.addCurrentUser(data);
         this.props.history.push("/");
       })
