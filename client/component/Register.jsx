@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import "../styles/register.scss";
 
 class Register extends Component {
@@ -31,7 +31,6 @@ class Register extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-
     if (this.state.password === this.state.confirmPassword) {
       fetch("http://localhost:8080/api/register", {
         method: "POST",
@@ -111,7 +110,10 @@ class Register extends Component {
           <button type="submit">Register</button>
         </form>
         <span>
-          Have an account? <Link className='registerLoginLink' to="/">Login</Link>
+          Have an account?{" "}
+          <Link className="registerLoginLink" to="/">
+            Login
+          </Link>
         </span>
       </div>
     );
