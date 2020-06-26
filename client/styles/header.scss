@@ -1,12 +1,19 @@
 .header {
   font-size: 50px;
   display: flex;
+  justify-content: space-between;
   margin: 20px;
-  padding: 8px;
   font-family: Roboto, Helvetica Neue, sans-serif;
   text-align: center;
-
+  button {
+    padding: 0px 20px 0px 20px;
+  }
+  .searchButton {
+    margin-right: 30px;
+  }
   p {
+    font-size: 20px;
+    font-family: Roboto, Helvetica Neue, sans-serif;
     text-align: center;
   }
   .spanOne {
