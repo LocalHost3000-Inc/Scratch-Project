@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import List from './List.jsx';
 import Bar from './Bar.jsx';
-import { Link } from 'react-router-dom';
 
 class Search extends Component {
   constructor() {

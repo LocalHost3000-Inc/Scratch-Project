@@ -31,8 +31,6 @@ dummy instance:
 */
 
 userController.createUser = (req, res, next) => {
-  console.log('CREATE USER CALLED');
-  console.log('req.body in userController (create user): ', req.body);
   let { username, password, name, home, email, type } = req.body;
 
   let arr = [username, password, name, home, email, type];
@@ -47,17 +45,29 @@ userController.createUser = (req, res, next) => {
     .catch(err => {
       console.log('Error in userController.createUser: ', err);
       return next(err);
+    })
+    .catch(err => {
+      console.log('Error in userController.createUser: ', err);
+      return next(err);
     });
 };
 
 userController.login = (req, res, next) => {
   //req -> matching username and paxwssword with data from database
   // console.log("req.body in userController: ", req);
-  console.log('req.body in userController: ', req.body);
   let { username, password } = req.body;
-  console.log('username, pw: ', username, password);
-  // const query = `SELECT * FROM user_info WHERE username=${req.body.username} password=${req.body.password}`
+  // let arr = [username, password];
+  const query = `SELECT * FROM user_info WHERE username='${username}' AND password='${password}';`;
 
+  db.query(query)
+    .then(data => {
+      res.locals.user = data.rows;
+      return next();
+    })
+    .catch(err => {
+      console.log('Error in userController.createUser: ', err);
+      return next(err);
+    });
   //res -> would be every column (data) from that user.
 };
 

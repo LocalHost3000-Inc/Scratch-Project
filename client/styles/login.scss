@@ -5,6 +5,7 @@
   justify-content: center;
   max-width: 200px;
   margin: auto;
+  font-family: Roboto, Helvetica Neue, sans-serif;
 }
 button {
   display: block;
@@ -20,4 +21,8 @@ form {
 }
 p {
   text-align: center;
+}
+.loginRegisterLink {
+  color: C85137;
+  padding-top: 100px;
 }
