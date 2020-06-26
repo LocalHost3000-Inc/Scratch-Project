@@ -30,6 +30,19 @@ dummy instance:
 {"username": "test", "password": "test2", "name": "t1", "home": "home1", }
 */
 
+userController.getProfile = (req, res, next) => {
+    console.log("Inside userController.getProfile.");
+    // console.log("req.body, get profile: ", req.params)
+    const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
+    db.query(query).then(data => {
+        res.locals.user = data.rows;
+        return next()
+    }).catch(err => {
+        console.log("Error in userController.getProfile: ", err);
+        return next(err);
+    }) 
+}
+
 
 userController.createUser = (req, res, next) => {
 
