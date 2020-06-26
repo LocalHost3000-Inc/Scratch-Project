@@ -46,6 +46,7 @@ class Register extends Component {
       })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data);
           this.props.addCurrentUser(data);
           this.props.history.push("/");
         })
