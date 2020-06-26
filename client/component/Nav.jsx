@@ -18,6 +18,66 @@ export default class Nav extends Component {
           <li>
             <Link to='/Profile'>PROFILE</Link>
           </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
+          <li>
+            <Link to='/login '>LOGIN</Link>
+          </li>
+          <li>
+            <Link to='/Profile'>PROFILE</Link>
+          </li>
         </ul>
       </div>
     );
