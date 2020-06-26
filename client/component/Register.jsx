@@ -57,7 +57,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="registration">
+      <div className="register">
         <h1>Register</h1>
         <span>{this.state.error ? this.state.error : " "}</span>
         <form onSubmit={this.handleSubmit} className="registrationform">

@@ -1,21 +1,23 @@
-.headerWrapper {
+.header {
   font-size: 50px;
-  width: 380px;
+  display: flex;
   margin: 20px;
   padding: 8px;
-  border-radius: 5px;
   font-family: Roboto, Helvetica Neue, sans-serif;
+
+  .headerInnerDiv {
+    text-align: center;
+  }
+  .spanOne {
+    font-weight: 300;
+  }
+  .spanTwo {
+    font-weight: 300;
+  }
+  .spanThree {
+    color: C85137;
+    font-weight: 500;
+  }
 }
-.headerInnerDiv {
-  text-align: center;
-}
-.spanOne {
-  font-weight: 300;
-}
-.spanTwo {
-  font-weight: 300;
-}
-.spanThree {
-  color: C85137;
-  font-weight: 500;
-}
+
+
