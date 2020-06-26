@@ -57,7 +57,7 @@ class Login extends Component {
             <input placeholder='username' name='usernameInputField' value={this.state.usernameInputField} onChange={this.handleUsernameInputField}>
             </input>
           </div>
-            <input placeholder='password' name='passwordInputField' value={this.state.passwordInputField} onChange={this.handlePasswordInputField}>
+            <input placeholder='password'name='passwordInputField' value={this.state.passwordInputField} onChange={this.handlePasswordInputField}>
             </input>
           <div>
             <button form='loginForm' type='submit'  value='Submit' onClick={this.handleSubmitButton}>
