@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Register from './Register.jsx';
 import Profile from './Profile.jsx';
 import Home from './Home.jsx';
-import Nav from './Nav.jsx';
+import Header from './Header.jsx';
 
 export default class App extends Component {
   constructor() {
@@ -24,7 +24,7 @@ export default class App extends Component {
     return (
       <div>
         <Router>
-          <Nav />
+          <Header />
           <Switch>
             <Route exact path='/' component={Home} />
             <Route

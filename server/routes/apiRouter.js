@@ -21,7 +21,7 @@ router.post('/register', userController.createUser, (req, res) => {
 
 router.post('/login', userController.login, (req, res) => {
   console.log('Successful post to database (/login route).')
-  return res.status(200).json({});
+  return res.status(200).json(res.locals.user);
 })
 
 
