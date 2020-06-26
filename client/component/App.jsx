@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Register from "./Register.jsx";
 import Profile from "./Profile.jsx";
 import Home from "./Home.jsx";
@@ -12,6 +12,12 @@ export default class App extends Component {
     this.state = {
       currentUser: {},
     };
+
+    this.addCurrentUser = this.addCurrentUser.bind(this);
+  }
+
+  addCurrentUser(user) {
+    this.setState({ currentUser: user });
   }
 
   render() {
@@ -21,7 +27,13 @@ export default class App extends Component {
           <Nav />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/register" component={Register} />
+            <Route
+              exact
+              path="/register"
+              component={() => (
+                <Register addCurrentUser={this.addCurrentUser} />
+              )}
+            />
             <Route exact path="/profile" component={Profile} />
           </Switch>
         </Router>
