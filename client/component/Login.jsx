@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
+import "../styles/login.scss";
 
 class Login extends Component {
   constructor() {
@@ -50,24 +51,18 @@ class Login extends Component {
   }
   render() {
     return (
-      <main>
+      <main className ='loginBox'>
         <h1>Login</h1>
         <form id='loginForm'>
-          <div>
             <input placeholder='username' name='usernameInputField' value={this.state.usernameInputField} onChange={this.handleUsernameInputField}>
             </input>
-          </div>
             <input placeholder='password'name='passwordInputField' value={this.state.passwordInputField} onChange={this.handlePasswordInputField}>
             </input>
-          <div>
             <button form='loginForm' type='submit'  value='Submit' onClick={this.handleSubmitButton}>
               Submit
             </button>
-          </div>
-            Don't have an account? <Link to="/register">Register Here</Link>
-          <div>
+            <p>Don't have an account? <Link to="/register">Register Here</Link></p>
             <p>{this.state.errorMessage}</p>
-          </div>
         </form>
       </main>
     )
