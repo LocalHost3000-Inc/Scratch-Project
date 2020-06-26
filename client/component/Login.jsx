@@ -82,9 +82,10 @@ class Login extends Component {
           </button>
         </form>
         <span>
-          Don't have an account? <Link to="/register">Register Here</Link>
+          Don't have an account? 
         </span>
-        <p>{this.state.errorMessage}</p>
+        <Link className='registerHere' to="/register">Register Here</Link>
+        <p className='error'>{this.state.errorMessage}</p>
       </div>
     );
   }

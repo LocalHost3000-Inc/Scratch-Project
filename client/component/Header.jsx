@@ -7,7 +7,7 @@ export default class Header extends Component {
   }
   render() {
     return (
-      <header className="headerWrapper">
+      <header className="header">
         <div className="headerInnerDiv">
           <span className="spanOne">Local</span>
           <span className="spanTwo">Host</span>
