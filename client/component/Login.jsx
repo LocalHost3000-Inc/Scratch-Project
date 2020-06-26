@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import "../styles/login.scss";
 
+// const loginLinkStyle = {
+//   'font-size': '50px',
+// }
+
 class Login extends Component {
   constructor() {
     super();
@@ -51,7 +55,7 @@ class Login extends Component {
   }
   render() {
     return (
-      <main className ='loginBox'>
+      <main className ='login'>
         <h1>Login</h1>
         <form id='loginForm'>
             <input placeholder='username' name='usernameInputField' value={this.state.usernameInputField} onChange={this.handleUsernameInputField}>
@@ -61,7 +65,7 @@ class Login extends Component {
             <button form='loginForm' type='submit'  value='Submit' onClick={this.handleSubmitButton}>
               Submit
             </button>
-            <p>Don't have an account? <Link to="/register">Register Here</Link></p>
+            <p >Don't have an account? <Link to="/register" className='registerHere'>Register Here</Link></p>
             <p>{this.state.errorMessage}</p>
         </form>
       </main>
