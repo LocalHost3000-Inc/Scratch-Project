@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "../styles/login.scss";
 
 // const loginLinkStyle = {
@@ -57,9 +57,9 @@ class Login extends Component {
   }
   render() {
     return (
-      <main className="loginBox">
+      <div className="loginBox">
         <h1>Login</h1>
-        <form id="loginForm">
+        <form id="loginForm" onSubmit={this.handleSubmitButton}>
           <input
             placeholder="username"
             name="usernameInputField"
@@ -72,23 +72,15 @@ class Login extends Component {
             value={this.state.passwordInputField}
             onChange={this.handlePasswordInputField}
           ></input>
-          <button
-            form="loginForm"
-            type="submit"
-            value="Submit"
-            onClick={this.handleSubmitButton}
-          >
+          <button form="loginForm" type="submit" value="Submit">
             Submit
           </button>
-          <p>
-            Don't have an account?{" "}
-            <Link className="loginRegisterLink" to="/register">
-              Register Here
-            </Link>
-          </p>
-          <p>{this.state.errorMessage}</p>
         </form>
-      </main>
+        <span>
+          Don't have an account? <Link to="/register">Register Here</Link>
+        </span>
+        <p>{this.state.errorMessage}</p>
+      </div>
     );
   }
 }
