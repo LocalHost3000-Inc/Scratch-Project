@@ -1,0 +1,77 @@
+// -"profileButtons" (parent, no child)
+// -"entire-profile-form" (parent)
+//    -"edit-profile-input" (child)
+// -profileAttrContainer
+//    -profileAttr
+.profileButton {
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    background-color: #C85137;
+    border: none;
+    color: white;
+    padding: 12px 26px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 13px;
+    margin: 4px 2px;
+    border-radius: 5%;
+    cursor: pointer;
+    margin-top: 30px;
+};
+.entire-profile-form {
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    font-weight: 200;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    .edit-profile-input:last-child {
+        margin-bottom: 30px;
+    }
+    .edit-profile-input {
+        box-shadow: 2px 5px whitesmoke; 
+        min-width: 60%;
+        margin-bottom: 10px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    p {
+        align-items: flex-start;
+    }
+};
+#edit-profile-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 48%;
+}
+#delete-profile-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 48%;
+}
+.profileAttrContainer {
+    margin-top: 100px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    font-weight: 200;
+    span {
+        font-weight: 500;
+        font-size: 17px; 
+    }
+    .profileAttr {
+        margin-bottom: 10px;
+        align-items: center;
+        font-family: Roboto, Helvetica Neue, sans-serif;
+        font-weight: 200;
+        font-size: 17px; 
+    }
+}
