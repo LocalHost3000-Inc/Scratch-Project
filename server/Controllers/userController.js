@@ -35,7 +35,7 @@ dummy instance:
 userController.createUser = (req, res, next) => {
   const query = `INSERT INTO user_info (username, password, name, home, email, type, profilepic)
      SELECT '${req.body.username}', '${req.body.password}', '${req.body.name}', '${req.body.home}', '${req.body.email}', '${req.body.type}', '${req.body.profilepic}'
-     WHERE NOT EXISTS (SELECT username, password, name, home, email, profilepic type FROM user_info WHERE username='${req.body.username}' OR email='${req.body.email}')
+     WHERE NOT EXISTS (SELECT username, password, name, home, email, type, profilepic FROM user_info WHERE username='${req.body.username}' OR email='${req.body.email}')
      RETURNING username, password, name, home, email, type, profilepic;`;
 
   db.query(query).then(data => {
