@@ -25,7 +25,7 @@ export default class App extends Component {
     return (
       <div className='app'>
         <Router>
-          <Header />
+          <Header currentUser={this.state.currentUser} />
           <Switch>
             <Route
               exact path="/"
