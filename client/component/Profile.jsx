@@ -8,7 +8,6 @@ class Profile extends Component {
     this.state = {};
   }
 
-
   // function
   renderProfile() {
     if (this.props.signedIn && !this.props.inEditMode) {
@@ -21,8 +20,7 @@ class Profile extends Component {
                 {this.props.currentUser.email}
               </a>
             </li>
-            <li>Home: {this.props.currentUser.home}</li>
-            <li>Type: {this.props.currentUser.type}</li>
+            <li className="profileAttr">Home: {this.props.currentUser.home}</li>
           </ul>
           <button className="profileButton" id="edit-profile-button" onClick={this.props.editProfile}>Edit Profile</button>
           <button className="profileButton" id="delete-profile-button" onClick={this.props.deleteProfile}>Delete Profile</button>
@@ -38,19 +36,22 @@ class Profile extends Component {
               className="edit-profile-input"
               name='username'
               value={this.props.currentUser.username}
+              placeholder='Username'
               onChange={this.props.editingProfile}
             ></input>
-            Email:
+            <p>Email:</p>
             <input
               className="edit-profile-input"
               name='email'
               value={this.props.currentUser.email}
+              placeholder="Email"
               onChange={this.props.editingProfile}
             ></input>
-            Home:
+            <p>Home:</p>
             <input
               className="edit-profile-input"
               name='home'
+              placeholder='Home'
               value={this.props.currentUser.home}
               onChange={this.props.editingProfile}
             ></input>
@@ -60,7 +61,7 @@ class Profile extends Component {
             </select>
             <button className="profileButton" type='submit'>Save Profile</button>
           </form>
-        </div >
+        </div>
       );
     }
   }
