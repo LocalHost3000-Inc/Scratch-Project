@@ -7,7 +7,11 @@ export default class Item extends Component {
         <ul>
           <li>Username: {this.props.username}</li>
           <li>Name: {this.props.name}</li>
-          <li>Email: {this.props.email}</li>
+          <li>Email:{' '}
+            <a href={`mailto:${this.props.currentUser.email}`} target="_blank" rel="noopener noreferrer">
+              {this.props.currentUser.email}
+            </a>
+          </li>
           <li>Home: {this.props.home}</li>
         </ul>
       </div>
