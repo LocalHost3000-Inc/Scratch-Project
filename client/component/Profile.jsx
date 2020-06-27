@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import '../styles/profile.scss';
 
 class Profile extends Component {
   constructor() {
@@ -7,56 +7,56 @@ class Profile extends Component {
     this.state = {};
   }
 
-
   // function
   renderProfile() {
     if (this.props.signedIn && !this.props.inEditMode) {
       return (
         <div>
-          <ul>
-            <li>Username: {this.props.currentUser.username}</li>
-            <li>Email:
+          <ul className="profileAttrContainer">
+            <li className="profileAttr">Username: {this.props.currentUser.username}</li>
+            <li className="profileAttr">Email:
               <a href={`mailto:${this.props.currentUser.email}`} target="_blank" rel="noopener noreferrer">
                 {this.props.currentUser.email}
               </a>
             </li>
-            <li>Home: {this.props.currentUser.home}</li>
-            <li>Type: {this.props.currentUser.type}</li>
+            <li className="profileAttr">Home: {this.props.currentUser.home}</li>
           </ul>
-          <button onClick={this.props.editProfile}>Edit Profile</button>
+          <button className="profileButton" onClick={this.props.editProfile}>Edit Profile</button>
           <button onClick={this.props.deleteProfile}>Delete Profile</button>
-        </div>
+        </div >
       );
     }
     if (this.props.signedIn && this.props.inEditMode) {
       return (
         <div>
-          <form onSubmit={this.props.saveProfile}>
-            Username:
+          <form className="entire-profile-form" onSubmit={this.props.saveProfile}>
+            <p>Username:</p>
             <input
+              className="edit-profile-input"
               name='username'
               value={this.props.currentUser.username}
+              placeholder='Username'
               onChange={this.props.editingProfile}
             ></input>
-            Email:
+            <p>Email:</p>
             <input
+              className="edit-profile-input"
               name='email'
               value={this.props.currentUser.email}
+              placeholder="Email"
               onChange={this.props.editingProfile}
             ></input>
-            Home:
+            <p>Home:</p>
             <input
+              className="edit-profile-input"
               name='home'
+              placeholder='Home'
               value={this.props.currentUser.home}
               onChange={this.props.editingProfile}
             ></input>
-            <select defaultValue={this.props.currentUser.type} onChange={this.props.handleSelect}>
-              <option value='Traveler'>Traveler</option>
-              <option value='Local'>Local</option>
-            </select>
-            <button type='submit'>Save Profile</button>
+            <button className="profileButton" type='submit'>Confirm Profile</button>
           </form>
-        </div >
+        </div>
       );
     }
   }
