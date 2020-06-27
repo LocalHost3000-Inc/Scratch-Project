@@ -1,5 +1,4 @@
 const db = require('../models/userInfoModels');
-//const { ResolvePlugin } = require('webpack')
 const userController = {};
 
 // The model represents any data that may be seen / used / processed, such as data from a database (more on this later!)
@@ -30,22 +29,9 @@ dummy instance:
 {"username": "test", "password": "test2", "name": "t1", "home": "home1", "email": "jerkface1@jerk.edu", "type": "traveler" }
 */
 
-userController.findUsers = (req, res, next) => {
-    const query = `SELECT * FROM user_info WHERE home='${req.body.home}';`;
-    db.query(query).then(data => {
-        if (data.rows.length > 0){
-            res.locals.searchResults = data.rows;
-            return next()
-        } else next({
-            log: 'No one matched your results',
-            status: 400,
-            message: {
-                err: 'No one matched your results.'
-            }
-        })
-    })
-}
-
+/*
+    Register Controller
+ */
 userController.createUser = (req, res, next) => {
     const query = `INSERT INTO user_info (username, password, name, home, email, type)
      SELECT '${req.body.username}', '${req.body.password}', '${req.body.name}', '${req.body.home}', '${req.body.email}', '${req.body.type}'
@@ -69,14 +55,36 @@ userController.createUser = (req, res, next) => {
     });
 }
 
+/*
+    /Users Controller
+ */
+
+userController.findUsers = (req, res, next) => {
+    const query = `SELECT * FROM user_info WHERE home='${req.body.home}';`;
+    db.query(query).then(data => {
+        if (data.rows.length > 0){
+            res.locals.searchResults = data.rows;
+            return next()
+        } else next({
+            log: 'No one matched your results',
+            status: 400,
+            message: {
+                err: 'No one matched your results.'
+            }
+        })
+    })
+}
+
+/*
+    Login Controller
+ */
+
 userController.login = (req, res, next) => {
-    //req -> matching username and paxwssword with data from database
-    // console.log("req.body in userController: ", req);
     let {
         username,
         password
     } = req.body
-    // let arr = [username, password];
+
     const query = `SELECT * FROM user_info WHERE username='${username}' AND password='${password}';`;
 
     db.query(query).then(data => {
@@ -97,6 +105,9 @@ userController.login = (req, res, next) => {
     //res -> would be every column (data) from that user. 
 }
 
+/*
+    Profile Controllers
+ */
 userController.getProfile = (req, res, next) => {
     console.log("Inside userController.getProfile.");
     const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
@@ -126,6 +137,7 @@ userController.updateProfile = (req, res, next) => {
         const allKeys = Object.keys(req.body);
         const allValues =  Object.values(req.body);
 
+//Used a for loop to iterate any changes to the profile and up date them one at a time.
         for (let i = 0; i < allKeys.length; i++){
             let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
 
