@@ -22,6 +22,7 @@ class App extends Component {
     this.editingProfile = this.editingProfile.bind(this);
     this.saveProfile = this.saveProfile.bind(this);
     this.deleteProfile = this.deleteProfile.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
 
   addCurrentUser(user) {
@@ -40,6 +41,18 @@ class App extends Component {
         currentUser: {
           ...this.state.currentUser,
           [event.target.name]: event.target.value,
+        },
+      },
+      () => console.log(this.state.currentUser)
+    );
+  }
+
+  handleSelect(e) {
+    this.setState(
+      {
+        currentUser: {
+          ...this.state.currentUser,
+          type: e.target.value,
         },
       },
       () => console.log(this.state.currentUser)
@@ -107,6 +120,7 @@ class App extends Component {
                 saveProfile={this.saveProfile}
                 deleteProfile={this.deleteProfile}
                 history={this.props.history}
+                handleSelect={this.handleSelect}
               />
             )}
           />

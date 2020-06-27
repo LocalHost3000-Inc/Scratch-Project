@@ -7,6 +7,7 @@ class Profile extends Component {
     this.state = {};
   }
 
+
   // function
   renderProfile() {
     if (this.props.signedIn && !this.props.inEditMode) {
@@ -20,7 +21,7 @@ class Profile extends Component {
               </a>
             </li>
             <li>Home: {this.props.currentUser.home}</li>
-            <li>{this.props.currentUser.type}</li>
+            <li>Type: {this.props.currentUser.type}</li>
           </ul>
           <button onClick={this.props.editProfile}>Edit Profile</button>
           <button onClick={this.props.deleteProfile}>Delete Profile</button>
@@ -49,13 +50,13 @@ class Profile extends Component {
               value={this.props.currentUser.home}
               onChange={this.props.editingProfile}
             ></input>
-            <select onChange={this.handleSelect}>
+            <select defaultValue={this.props.currentUser.type} onChange={this.props.handleSelect}>
               <option value='Traveler'>Traveler</option>
               <option value='Local'>Local</option>
             </select>
             <button type='submit'>Save Profile</button>
           </form>
-        </div>
+        </div >
       );
     }
   }
