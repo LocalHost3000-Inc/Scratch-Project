@@ -3,7 +3,6 @@
 //    -"edit-profile-input" (child)
 // -profileAttrContainer
 //    -profileAttr
-
 .profileButton {
     font-family: Roboto, Helvetica Neue, sans-serif;
     background-color: #C85137;
@@ -19,7 +18,6 @@
     cursor: pointer;
     margin-top: 30px;
 };
-
 .entire-profile-form {
     font-family: Roboto, Helvetica Neue, sans-serif;
     font-weight: 200;
@@ -41,9 +39,39 @@
     p {
         align-items: flex-start;
     }
-
 };
-
+#edit-profile-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 48%;
+}
+#delete-profile-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 48%;
+}
 .profileAttrContainer {
+    margin-top: 100px;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Roboto, Helvetica Neue, sans-serif;
+    font-weight: 200;
+    span {
+        font-weight: 500;
+        font-size: 17px; 
+    }
+    .profileAttr {
+        margin-bottom: 10px;
+        align-items: center;
+        font-family: Roboto, Helvetica Neue, sans-serif;
+        font-weight: 200;
+        font-size: 17px; 
+    }
 }
