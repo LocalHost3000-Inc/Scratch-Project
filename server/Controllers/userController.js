@@ -24,7 +24,6 @@ CREATE TABLE user_info (
     type varchar(255)
 )
 ;
-
 dummy instance: 
 {"username": "test", "password": "test2", "name": "t1", "home": "home1", "email": "jerkface1@jerk.edu", "type": "traveler" }
 */
