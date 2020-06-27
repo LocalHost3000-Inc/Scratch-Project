@@ -53,7 +53,7 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
-      .then(data => this.setState({ currentUser: data }))
+      .then(data => this.setState({ currentUser: data }, () => console.log(this.state.currentUser)))
       .catch(err => console.log(err));
   }
 
