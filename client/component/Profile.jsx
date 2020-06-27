@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Profile extends Component {
   constructor() {
     super();
     this.state = {};
   }
+
 
   // function
   renderProfile() {
@@ -19,9 +21,11 @@ class Profile extends Component {
               </a>
             </li>
             <li>Home: {this.props.currentUser.home}</li>
+            <li>Type: {this.props.currentUser.type}</li>
           </ul>
           <button onClick={this.props.editProfile}>Edit Profile</button>
-        </div >
+          <button onClick={this.props.deleteProfile}>Delete Profile</button>
+        </div>
       );
     }
     if (this.props.signedIn && this.props.inEditMode) {
@@ -46,9 +50,13 @@ class Profile extends Component {
               value={this.props.currentUser.home}
               onChange={this.props.editingProfile}
             ></input>
-            <button type='submit'>Confirm Profile</button>
+            <select defaultValue={this.props.currentUser.type} onChange={this.props.handleSelect}>
+              <option value='Traveler'>Traveler</option>
+              <option value='Local'>Local</option>
+            </select>
+            <button type='submit'>Save Profile</button>
           </form>
-        </div>
+        </div >
       );
     }
   }
