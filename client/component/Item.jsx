@@ -8,8 +8,8 @@ export default class Item extends Component {
           <li>Username: {this.props.username}</li>
           <li>Name: {this.props.name}</li>
           <li>Email:{' '}
-            <a href={`mailto:${this.props.currentUser.email}`} target="_blank" rel="noopener noreferrer">
-              {this.props.currentUser.email}
+            <a href={`mailto:${this.props.email}`} target="_blank" rel="noopener noreferrer">
+              {this.props.email}
             </a>
           </li>
           <li>Home: {this.props.home}</li>
