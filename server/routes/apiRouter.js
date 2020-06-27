@@ -28,7 +28,7 @@ router.post('/login', userController.login, (req, res) => {
 });
 
 
-router.get('/users', userController.findUsers, (req, res) => {
+router.get('/users/:home', userController.findUsers, (req, res) => {
   console.log('Successful get to the database (/users route');
   return res.status(200).json(res.locals.searchResults);
 })
