@@ -113,7 +113,9 @@ class Register extends Component {
           />
           <button type='submit'>Register</button>
         </form>
-        <span className='errormessage'>{this.state.error ? 'Username or email already taken. Please try again' : ' '}</span>
+        <span className='errormessage'>
+          {this.state.error ? 'Username or email already taken. Please try again' : ' '}
+        </span>
         <span>
           Have an account?{' '}
           <Link className='registerLoginLink' to='/'>
