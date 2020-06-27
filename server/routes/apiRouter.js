@@ -27,6 +27,15 @@ router.post('/login', userController.login, (req, res) => {
   return res.status(200).json(res.locals.user);
 });
 
+
+router.get('/users', userController.findUsers, (req, res) => {
+  console.log('Successful get to the database (/users route');
+  return res.status(200).json(res.locals.searchResults);
+})
+
+/*
+  Profile Routers
+*/
 router.get('/profile/:id', userController.getProfile, (req, res) => {
   console.log('Successful get to database (/profile:id route).');
   return res.status(200).json(res.locals.user);
