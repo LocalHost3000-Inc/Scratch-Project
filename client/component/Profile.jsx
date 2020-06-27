@@ -8,47 +8,92 @@ class Profile extends Component {
 
   // function
   renderProfile() {
-    console.log(this.props.currentUser);
-    if (this.props.currentUser.username && this.props.inEditMode === false) {
+    if (this.props.signedIn && !this.props.inEditMode) {
       return (
         <div>
           <ul>
             <li>Username: {this.props.currentUser.username}</li>
-            <li>Email: {this.props.currentUser.email}</li>
+            <li>Email:
+              <a href={`mailto:${this.props.currentUser.email}`} target="_blank" rel="noopener noreferrer">
+                {this.props.currentUser.email}
+              </a>
+            </li>
             <li>Home: {this.props.currentUser.home}</li>
           </ul>
-          <button onClick={this.handleClick}>Edit Profile</button>
-        </div>
+          <button onClick={this.props.editProfile}>Edit Profile</button>
+        </div >
       );
     }
-    if (this.props.currentUser.username && this.props.inEditMode === true) {
+    if (this.props.signedIn && this.props.inEditMode) {
       return (
         <div>
-          <ul>
-            <li>
-              Username: <input name='username' value={this.props.currentUser.username}></input>
-            </li>
-            <li>
-              Email: <input name='email' value={this.props.currentUser.email}></input>
-            </li>
-            <li>
-              Home: <input name='home' value={this.props.currentUser.home}></input>
-            </li>
-          </ul>
-          <button onClick={this.handleClick}>Edit Profile</button>
+          <form onSubmit={this.props.saveProfile}>
+            Username:
+            <input
+              name='username'
+              value={this.props.currentUser.username}
+              onChange={this.props.editingProfile}
+            ></input>
+            Email:
+            <input
+              name='email'
+              value={this.props.currentUser.email}
+              onChange={this.props.editingProfile}
+            ></input>
+            Home:
+            <input
+              name='home'
+              value={this.props.currentUser.home}
+              onChange={this.props.editingProfile}
+            ></input>
+            <button type='submit'>Confirm Profile</button>
+          </form>
         </div>
       );
     }
   }
-  // if currentuser.name
-  // check if editmode: false
-  // render ul li
-  // if editmode true
-  // render input fields
 
   render() {
     //(if not in edit mode)
-    return <div>{this.renderProfile()}</div>;
+    return (
+      <div>
+        {/* {this.props.signedIn && !this.props.inEditMode ? (
+          <div>
+            <ul>
+              <li>Username: {this.props.currentUser.username}</li>
+              <li>Email: {this.props.currentUser.email}</li>
+              <li>Home: {this.props.currentUser.home}</li>
+            </ul>
+            <button onClick={this.props.editProfile}>Edit Profile</button>
+          </div>
+        ) : this.props.signedIn && this.props.inEditMode ? (
+          <div>
+            <form onSubmit={this.props.editProfile}>
+              Username:
+              <input
+                name='username'
+                value={this.props.currentUser.username}
+                onChange={this.props.editingProfile}
+              ></input>
+              Email:
+              <input
+                name='email'
+                value={this.props.currentUser.email}
+                onChange={this.props.editingProfile}
+              ></input>
+              Home:
+              <input
+                name='home'
+                value={this.props.currentUser.home}
+                onChange={this.props.editingProfile}
+              ></input>
+              <button type='submit'>Confirm Profile</button>
+            </form>
+          </div>
+        ) : null} */}
+        {this.renderProfile()}
+      </div>
+    );
   }
 }
 
