@@ -124,7 +124,7 @@ userController.updateProfile = (req, res, next) => {
   // req.body {"name": test, "home": USA}
   const allKeys = Object.keys(req.body);
   const allValues = Object.values(req.body);
-
+  console.log('ALL VALUES: ', allValues);
   for (let i = 0; i < allKeys.length; i++) {
     let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`;
 
