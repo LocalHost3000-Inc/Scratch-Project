@@ -15,7 +15,7 @@ class Search extends Component {
   }
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ searchVal: event.target.value });
   }
 
   handleSubmit(event) {
@@ -42,13 +42,9 @@ class Search extends Component {
     // ];
 
     // this.setState({ results: results, hasResults: true });
-
+    let home = this.state.searchVal
     event.preventDefault();
-    fetch('/api/user', {
-      method: 'POST',
-      body: JSON.stringify({ location: this.state.searchVal }),
-      headers: { 'Content-Type': 'application/json' },
-    })
+    fetch(`http://localhost:8080/api/users/${home}`)
       .then(res => {
         return res.json();
       })

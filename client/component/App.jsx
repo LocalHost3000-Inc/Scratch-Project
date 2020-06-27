@@ -43,6 +43,7 @@ export default class App extends Component {
     );
   }
   saveProfile(event) {
+    event.preventDefault();
     // on click function that will send fetch request that will send put request to server with current user in body/params
     // the data we want in response will be the new user
     // we will want to set the currentUser in state to be the response
@@ -54,7 +55,7 @@ export default class App extends Component {
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
-      .then(data => this.setState({ currentUser: data }, () => console.log(this.state.currentUser)))
+      .then(data => this.setState({ currentUser: data, inEditMode: false }, () => console.log(this.state.currentUser)))
       .catch(err => console.log(err));
   }
 
