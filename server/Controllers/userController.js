@@ -32,19 +32,13 @@ dummy instance:
 
 
 userController.createUser = (req, res, next) => {
-    let {
-        username,
-        password,
-        name,
-        home,
-        email,
-        type
-    } = req.body;
-    let arr = [username, password, name, home, email, type];
 
-    const query = 'INSERT INTO user_info (username, password, name, home, email, type) VALUES ($1, $2, $3, $4, $5, $6)';
+    const query = `INSERT INTO user_info (username, password, name, home, email, type)
+     SELECT '${req.body.username}', '${req.body.password}', '${req.body.name}', '${req.body.home}', '${req.body.email}', '${req.body.type}'
+     WHERE NOT EXISTS (SELECT username, password, name, home, email, type FROM user_info WHERE username='${req.body.username}' OR email='${req.body.email}')
+     RETURNING username, password, name, home, email, type;`;
 
-    db.query(query, arr).then(data => {
+    db.query(query).then(data => {
         console.log(data)
         return next();
     }).catch(err => {
