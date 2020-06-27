@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Register from './Register.jsx';
-import Profile from './Profile.jsx';
-import Home from './Home.jsx';
-import Header from './Header.jsx';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Register from "./Register.jsx";
+import Profile from "./Profile.jsx";
+import Home from "./Home.jsx";
+import Header from "./Header.jsx";
+import '../styles/app.scss';
 
 export default class App extends Component {
   constructor() {
@@ -59,9 +60,9 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className='app'>
         <Router>
-          <Header />
+          <Header currentUser={this.state.currentUser} />
           <Switch>
             <Route
               exact

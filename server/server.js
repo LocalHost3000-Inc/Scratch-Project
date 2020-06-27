@@ -19,8 +19,8 @@ app.get('*', (req, res) => {
 // catch-all route handler for any requests to an unknown route
 // This catches any unknown routes.
 app.use((req, res) => {
-  console.log('Unknown route. Try another route.');
-  return res.status(404);
+  console.log("Unknown route. Try another route.");
+  return res.status(404)
 });
 
 //express error handler

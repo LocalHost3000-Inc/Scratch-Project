@@ -1,5 +1,4 @@
 const db = require('../models/userInfoModels');
-//const { ResolvePlugin } = require('webpack')
 const userController = {};
 
 // The model represents any data that may be seen / used / processed, such as data from a database (more on this later!)
@@ -30,118 +29,126 @@ dummy instance:
 {"username": "test", "password": "test2", "name": "t1", "home": "home1", "email": "jerkface1@jerk.edu", "type": "traveler" }
 */
 
+/*
+    Register Controller
+ */
 userController.createUser = (req, res, next) => {
-  let { username, password, name, home, email, type } = req.body;
-  let arr = [username, password, name, home, email, type];
+  const query = `INSERT INTO user_info (username, password, name, home, email, type)
+     SELECT '${req.body.username}', '${req.body.password}', '${req.body.name}', '${req.body.home}', '${req.body.email}', '${req.body.type}'
+     WHERE NOT EXISTS (SELECT username, password, name, home, email, type FROM user_info WHERE username='${req.body.username}' OR email='${req.body.email}')
+     RETURNING username, password, name, home, email, type;`;
 
-  const query =
-    'INSERT INTO user_info (username, password, name, home, email, type) VALUES ($1, $2, $3, $4, $5, $6)';
-
-  db.query(query, arr)
-    .then(data => {
-      console.log(data);
+  db.query(query).then(data => {
+    if (data.rows.length > 0) {
+      res.locals.user = data.rows[0];
       return next();
-    })
-    .catch(err => {
-      console.log('Error in userController.createUser: ', err);
+    } else (next({
+      log: 'There is a duplicate value for username or email.',
+      status: 400,
+      message: {
+        err: 'There is a duplicate value for username or email.'
+      }
+    })).catch(err => {
+      console.log("Error in userController.createUser: ", err);
       return next(err);
     })
-    .catch(err => {
-      console.log('Error in userController.createUser: ', err);
-      return next(err);
-    });
-};
+  });
+}
+
+/*
+    /Users Controller
+ */
+
+userController.findUsers = (req, res, next) => {
+  const query = `SELECT * FROM user_info WHERE home='${req.body.home}';`;
+  db.query(query).then(data => {
+    if (data.rows.length > 0) {
+      res.locals.searchResults = data.rows;
+      return next()
+    } else next({
+      log: 'No one matched your results',
+      status: 400,
+      message: {
+        err: 'No one matched your results.'
+      }
+    })
+  })
+}
+
+/*
+    Login Controller
+ */
 
 userController.login = (req, res, next) => {
-  //req -> matching username and paxwssword with data from database
-  // console.log("req.body in userController: ", req);
-  let { username, password } = req.body;
-  // let arr = [username, password];
+  let {
+    username,
+    password
+  } = req.body
+
   const query = `SELECT * FROM user_info WHERE username='${username}' AND password='${password}';`;
 
-  db.query(query)
-    .then(data => {
-      if (data.rows.length > 0) {
-        res.locals.user = data.rows[0];
-        return next();
-      } else
-        next({
-          log: 'user does not exist',
-          status: 400,
-          message: {
-            err: 'user does not exist',
-          },
-        });
-    })
-    .catch(err => {
-      console.log('Error in userController.createUser: ', err);
-      return next(err);
-    })
-    .catch(err => {
-      console.log('Error in userController.createUser: ', err);
-      return next(err);
-    })
-    .catch(err => {
-      console.log('Error in userController.createUser: ', err);
-      return next(err);
-    });
-  //res -> would be every column (data) from that user.
-};
-
-userController.getProfile = (req, res, next) => {
-  console.log('Inside userController.getProfile.');
-  // console.log("req.body, get profile: ", req.params)
-  const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
-  db.query(query)
-    .then(data => {
-      res.locals.user = data.rows;
+  db.query(query).then(data => {
+    if (data.rows.length > 0) {
+      res.locals.user = data.rows[0];
       return next();
-    })
-    .catch(err => {
-      console.log('Error in userController.getProfile: ', err);
-      return next(err);
-    });
-};
+    } else (next({
+      log: 'user does not exist',
+      status: 400,
+      message: {
+        err: 'user does not exist'
+      }
+    }))
+  }).catch(err => {
+    console.log("Error in userController.createUser: ", err);
+    return next(err);
+  })
+  //res -> would be every column (data) from that user. 
+}
+
+/*
+    Profile Controllers
+ */
+userController.getProfile = (req, res, next) => {
+  console.log("Inside userController.getProfile.");
+  const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
+  db.query(query).then(data => {
+    res.locals.user = data.rows;
+    return next()
+  }).catch(err => {
+    console.log("Error in userController.getProfile: ", err);
+    return next(err);
+  })
+}
 
 userController.deleteProfile = (req, res, next) => {
-  console.log('Inside userController.deleteProfile.');
+  console.log("Inside userController.deleteProfile.")
   const query = `DELETE FROM user_info WHERE id='${req.params.id}';`;
-  db.query(query)
-    .then(data => {
-      console.log("Deleting User's information");
-      return next();
-    })
-    .catch(err => {
-      console.log('Error in userController.getProfile: ', err);
-      return next(err);
-    });
-};
+  db.query(query).then(data => {
+    console.log("Deleting User's information");
+    return next();
+  }).catch(err => {
+    console.log("Error in userController.getProfile: ", err);
+    return next(err);
+  })
+}
 
 userController.updateProfile = (req, res, next) => {
-  console.log('Inside userController.updateProfile');
-  console.log('REQ DAT BODY', req.body);
-
-  // req.body {"name": test, "home": USA}
+  console.log("Inside userController.updateProfile")
   const allKeys = Object.keys(req.body);
   const allValues = Object.values(req.body);
-  console.log('ALL VALUES: ', allValues);
+
+  //Used a for loop to iterate any changes to the profile and up date them one at a time.
   for (let i = 0; i < allKeys.length; i++) {
-    let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`;
+    let query = `UPDATE user_info SET ${allKeys[i]} = '${allValues[i]}' WHERE id='${req.params.id}'`
 
-    db.query(query)
-      .then(data => {
-        res.locals.user = data.rows;
-        return next();
-      })
-      .catch(err => {
-        console.log('Error in userController.updateProfile', err);
-        return next(err);
-      });
+    db.query(query).then(data => {
+      res.locals.user = data.rows;
+      return next()
+    }).catch(err => {
+      console.log("Error in userController.updateProfile", err);
+      return next(err)
+    })
   }
-
-  // const query = `UPDATE user_info
-  //                SET
-  //                WHERE id='${req.params.id}';`;
-};
+}
 
 module.exports = userController;
