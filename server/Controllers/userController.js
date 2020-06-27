@@ -43,10 +43,10 @@ userController.createUser = (req, res, next) => {
       res.locals.user = data.rows[0];
       return next();
     } else (next({
-      log: 'There is a duplicate value for username or email.',
+      log: 'Username and/or email already exists.',
       status: 400,
       message: {
-        err: 'There is a duplicate value for username or email.'
+        err: 'Username and/or email already exists.'
       }
     })).catch(err => {
       console.log("Error in userController.createUser: ", err);
@@ -62,7 +62,7 @@ userController.createUser = (req, res, next) => {
 userController.findUsers = (req, res, next) => {
   // console.log("req.params: ", req.params);
   // console.log("req: ", req.params.home);
-  const query = `SELECT * FROM user_info WHERE home='${req.params.home}';`;
+  const query = `SELECT * FROM user_info WHERE home='${req.params.home}' AND type='Local';`;
   db.query(query).then(data => {
     if (data.rows.length > 0) {
       res.locals.searchResults = data.rows;
@@ -137,7 +137,7 @@ userController.deleteProfile = (req, res, next) => {
 userController.updateProfile = (req, res, next) => {
   console.log("Inside userController.updateProfile")
 
-  const query = `UPDATE user_info SET username='${req.body.username}', password='${req.body.password}', name='${req.body.name}', home='${req.body.home}', email='${req.body.email}', type='${req.body.type}' WHERE id='${req.params.id}' returning *`
+  const query = `UPDATE user_info SET username='${req.body.username}', password='${req.body.password}', name='${req.body.name}', home='${req.body.home}', email='${req.body.email}', type='${req.body.type}', profilepic='${req.body.profilepic}' WHERE id='${req.params.id}' returning *`
   db.query(query).then(data => {
     console.log("Updating User's information");
     console.log(data.rows);

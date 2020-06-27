@@ -10,10 +10,11 @@ class Register extends Component {
       username: '',
       name: '',
       home: '',
-      type: '',
+      type: 'Traveler',
       email: '',
       password: '',
       confirmPassword: '',
+      error: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -46,8 +47,12 @@ class Register extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          this.props.addCurrentUser(data);
-          this.props.history.push('/');
+          if (data.err) {
+            this.setState({ error: data.err }, () => console.log(this.state))
+          } else {
+            this.props.addCurrentUser(data);
+            this.props.history.push('/');
+          }
         })
         .catch(err => console.warn(err));
     } else {
@@ -59,7 +64,6 @@ class Register extends Component {
     return (
       <div className='register'>
         <h1>Register</h1>
-        <span>{this.state.error ? this.state.error : ' '}</span>
         <form onSubmit={this.handleSubmit} className='registrationform'>
           <select onChange={this.handleSelect}>
             <option value='Traveler'>Traveler</option>
@@ -109,6 +113,9 @@ class Register extends Component {
           />
           <button type='submit'>Register</button>
         </form>
+        <span className='errormessage'>
+          {this.state.error ? 'Username or email already taken. Please try again' : ' '}
+        </span>
         <span>
           Have an account?{' '}
           <Link className='registerLoginLink' to='/'>

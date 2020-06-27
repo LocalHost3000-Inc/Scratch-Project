@@ -14,7 +14,11 @@ class Profile extends Component {
         <div>
           <ul>
             <li>Username: {this.props.currentUser.username}</li>
-            <li>Email: {this.props.currentUser.email}</li>
+            <li>Email:
+              <a href={`mailto:${this.props.currentUser.email}`} target="_blank" rel="noopener noreferrer">
+                {this.props.currentUser.email}
+              </a>
+            </li>
             <li>Home: {this.props.currentUser.home}</li>
             <li>{this.props.currentUser.type}</li>
           </ul>
