@@ -7,7 +7,7 @@ export default class Bar extends Component {
       <div className="searchContainer">
         <form className="searchForm" method='POST' onSubmit={this.props.handleSubmit}>
           <input className="searchField" type='text' onChange={this.props.handleChange}></input>
-          <input type='submit' className="submitButton"></input>
+          <button type='submit' className="submitButton">Search</button>
         </form>
       </div>
     );
