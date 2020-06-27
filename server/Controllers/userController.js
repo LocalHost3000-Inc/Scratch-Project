@@ -61,7 +61,7 @@ userController.createUser = (req, res, next) => {
 userController.findUsers = (req, res, next) => {
   // console.log("req.params: ", req.params);
   // console.log("req: ", req.params.home);
-  const query = `SELECT * FROM user_info WHERE home='${req.params.home}';`;
+  const query = `SELECT * FROM user_info WHERE home='${req.params.home}' AND type='Local';`;
   db.query(query).then(data => {
     if (data.rows.length > 0) {
       res.locals.searchResults = data.rows;

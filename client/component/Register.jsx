@@ -10,10 +10,11 @@ class Register extends Component {
       username: '',
       name: '',
       home: '',
-      type: '',
+      type: 'Traveler',
       email: '',
       password: '',
       confirmPassword: '',
+      error: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -46,8 +47,12 @@ class Register extends Component {
       })
         .then(res => res.json())
         .then(data => {
-          this.props.addCurrentUser(data);
-          this.props.history.push('/');
+          if (data.err) {
+            this.setState({ error: data.err }, () => console.log(this.state))
+          } else {
+            this.props.addCurrentUser(data);
+            this.props.history.push('/');
+          }
         })
         .catch(err => console.warn(err));
     } else {
