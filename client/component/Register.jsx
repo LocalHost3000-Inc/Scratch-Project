@@ -1,19 +1,19 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import "../styles/register.scss";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import '../styles/register.scss';
 
 class Register extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
-      name: "",
-      home: "",
-      type: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      username: '',
+      name: '',
+      home: '',
+      type: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,9 +32,9 @@ class Register extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this.state.password === this.state.confirmPassword) {
-      fetch("http://localhost:8080/api/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      fetch('http://localhost:8080/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           username: this.state.username,
           email: this.state.email,
@@ -44,74 +44,74 @@ class Register extends Component {
           type: this.state.type,
         }),
       })
-        .then((res) => res.json())
-        .then((data) => {
+        .then(res => res.json())
+        .then(data => {
           this.props.addCurrentUser(data);
-          this.props.history.push("/");
+          this.props.history.push('/');
         })
-        .catch((err) => console.warn(err));
+        .catch(err => console.warn(err));
     } else {
-      this.setState({ error: "Please check password again" });
+      this.setState({ error: 'Please check password again' });
     }
   }
 
   render() {
     return (
-      <div className="register">
+      <div className='register'>
         <h1>Register</h1>
-        <span>{this.state.error ? this.state.error : " "}</span>
-        <form onSubmit={this.handleSubmit} className="registrationform">
+        <span>{this.state.error ? this.state.error : ' '}</span>
+        <form onSubmit={this.handleSubmit} className='registrationform'>
           <select onChange={this.handleSelect}>
-            <option value="Traveler">Traveler</option>
-            <option value="Local">Local</option>
+            <option value='Traveler'>Traveler</option>
+            <option value='Local'>Local</option>
           </select>
           <input
-            type="text"
+            type='text'
             value={this.state.username}
-            name="username"
-            placeholder="Enter Username"
+            name='username'
+            placeholder='Enter Username'
             onChange={this.handleChange}
           />
           <input
-            type="text"
+            type='text'
             value={this.state.name}
-            name="name"
-            placeholder="Enter Name"
+            name='name'
+            placeholder='Enter Name'
             onChange={this.handleChange}
           />
           <input
-            type="text"
+            type='text'
             value={this.state.home}
-            name="home"
-            placeholder="Enter Home"
+            name='home'
+            placeholder='Enter Home'
             onChange={this.handleChange}
           />
           <input
-            type="text"
+            type='text'
             value={this.state.email}
-            name="email"
-            placeholder="Enter Email"
+            name='email'
+            placeholder='Enter Email'
             onChange={this.handleChange}
           />
           <input
-            type="password"
+            type='password'
             value={this.state.password}
-            name="password"
-            placeholder="Enter Password"
+            name='password'
+            placeholder='Enter Password'
             onChange={this.handleChange}
           />
           <input
-            type="password"
+            type='password'
             value={this.state.confirmPassword}
-            name="confirmPassword"
-            placeholder="Confirm Password"
+            name='confirmPassword'
+            placeholder='Confirm Password'
             onChange={this.handleChange}
           />
-          <button type="submit">Register</button>
+          <button type='submit'>Register</button>
         </form>
         <span>
-          Have an account?{" "}
-          <Link className="registerLoginLink" to="/">
+          Have an account?{' '}
+          <Link className='registerLoginLink' to='/'>
             Login
           </Link>
         </span>

@@ -12,13 +12,20 @@ export default class App extends Component {
 
     this.state = {
       currentUser: {},
+      inEditMode: false,
     };
 
     this.addCurrentUser = this.addCurrentUser.bind(this);
   }
 
   addCurrentUser(user) {
-    this.setState({ currentUser: user });
+    this.setState({ currentUser: user }, () => console.log(this.state.currentUser));
+  }
+
+  editProfile() {
+    this.setState({ inEditMode: true });
+    // this.setState({...currentUser, user)
+    // fetch('/api/profile/:id')
   }
 
   render() {
@@ -28,16 +35,24 @@ export default class App extends Component {
           <Header currentUser={this.state.currentUser} />
           <Switch>
             <Route
-              exact path="/"
-              component={() => (<Home currentUser={this.state.currentUser} addCurrentUser={this.addCurrentUser} />)}
+              exact
+              path='/'
+              component={() => (
+                <Home currentUser={this.state.currentUser} addCurrentUser={this.addCurrentUser} />
+              )}
             />
             <Route
               exact
-              path="/register"
-              component={() => (
-                <Register addCurrentUser={this.addCurrentUser} />)}
+              path='/register'
+              component={() => <Register addCurrentUser={this.addCurrentUser} />}
             />
-            <Route exact path="/profile" component={Profile} />
+            <Route
+              exact
+              path='/profile'
+              component={() => (
+                <Profile inEditMode={this.state.inEditMode} currentUser={this.state.currentUser} />
+              )}
+            />
           </Switch>
         </Router>
       </div>

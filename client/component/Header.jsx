@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router-dom';
-
 import "../styles/header.scss";
+
 
 class Header extends Component {
   constructor() {
