@@ -30,21 +30,43 @@ dummy instance:
 {"username": "test", "password": "test2", "name": "t1", "home": "home1", "email": "jerkface1@jerk.edu", "type": "traveler" }
 */
 
+userController.findUsers = (req, res, next) => {
+    const query = `SELECT * FROM user_info WHERE home='${req.body.home}';`;
+    db.query(query).then(data => {
+        if (data.rows.length > 0){
+            res.locals.searchResults = data.rows;
+            return next()
+        } else next({
+            log: 'No one matched your results',
+            status: 400,
+            message: {
+                err: 'No one matched your results.'
+            }
+        })
+    })
+}
 
 userController.createUser = (req, res, next) => {
-
     const query = `INSERT INTO user_info (username, password, name, home, email, type)
      SELECT '${req.body.username}', '${req.body.password}', '${req.body.name}', '${req.body.home}', '${req.body.email}', '${req.body.type}'
      WHERE NOT EXISTS (SELECT username, password, name, home, email, type FROM user_info WHERE username='${req.body.username}' OR email='${req.body.email}')
      RETURNING username, password, name, home, email, type;`;
 
     db.query(query).then(data => {
-        console.log(data)
-        return next();
-    }).catch(err => {
-        console.log("Error in userController.createUser: ", err);
-        return next(err);
-    })
+        if (data.rows.length > 0) {
+            res.locals.user = data.rows[0];
+            return next();
+        } else(next({
+                log: 'There is a duplicate value for username or email.',
+                status: 400,
+                message: {
+                    err: 'There is a duplicate value for username or email.'
+                }
+            })).catch(err => {
+                console.log("Error in userController.createUser: " , err);
+                return next(err);
+            } )
+    });
 }
 
 userController.login = (req, res, next) => {
@@ -77,7 +99,6 @@ userController.login = (req, res, next) => {
 
 userController.getProfile = (req, res, next) => {
     console.log("Inside userController.getProfile.");
-    // console.log("req.body, get profile: ", req.params)
     const query = `SELECT * FROM user_info WHERE id='${req.params.id}';`;
     db.query(query).then(data => {
         res.locals.user = data.rows;
@@ -102,9 +123,6 @@ userController.deleteProfile = (req, res, next) => {
 
 userController.updateProfile = (req, res, next) => {
     console.log("Inside userController.updateProfile")
-    console.log('REQ DAT BODY', req.body);
-
-    // req.body {"name": test, "home": USA}
         const allKeys = Object.keys(req.body);
         const allValues =  Object.values(req.body);
 
