@@ -10,42 +10,43 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
-      usernameInputField: '',
-      passwordInputField: '',
+      username: '',
+      password: '',
       errorMessage: '',
     };
-    this.handleUsernameInputField = this.handleUsernameInputField.bind(this);
-    this.handlePasswordInputField = this.handlePasswordInputField.bind(this);
+    this.handleChange = this.handleChange.bind(this);
     this.handleSubmitButton = this.handleSubmitButton.bind(this);
     this.handleSignUpButton = this.handleSignUpButton.bind(this);
   }
-  handleUsernameInputField(e) {
-    this.setState({ usernameInputField: e.target.value });
+  handleChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
-  handlePasswordInputField(e) {
-    this.setState({ passwordInputField: e.target.value });
-  }
+
   handleSignUpButton(e) {
     this.props.history.push('/register');
     e.preventDefault();
   }
-  handlePasswordUsernameError(e) {}
+
+  handlePasswordUsernameError(e) { }
+
   handleSubmitButton(e) {
+    e.preventDefault();
     console.log('call to submit button');
     let url = 'http://localhost:8080/api/login';
     fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        username: this.state.usernameInputField,
-        password: this.state.passwordInputField,
+        username: this.state.username,
+        password: this.state.password,
       }),
     })
       .then(res => res.json())
       .then(data => {
         console.log('call to .then');
-        if (data.err === 'user does not exist')
-          return this.setState({ errorMessage: 'incorrect username or password' });
+        if (data.err === 'user does not exist') return this.setState({ errorMessage: 'incorrect username or password' });
+
+        this.setState({ usernameInputField: '', passwordInputField: '' });
         this.props.addCurrentUser(data);
         this.props.history.push('/');
       })
@@ -55,8 +56,6 @@ class Login extends Component {
           errorMessage: 'sorry, we could not process your username and password',
         });
       });
-    this.setState({ usernameInputField: '', passwordInputField: '' });
-    e.preventDefault();
   }
   render() {
     return (
@@ -65,16 +64,16 @@ class Login extends Component {
         <form id='loginForm' onSubmit={this.handleSubmitButton}>
           <input
             placeholder='username'
-            name='usernameInputField'
+            name='username'
             value={this.state.usernameInputField}
-            onChange={this.handleUsernameInputField}
+            onChange={this.handleChange}
           ></input>
           <input
             placeholder="password"
-            name="passwordInputField"
+            name="password"
             type="password"
             value={this.state.passwordInputField}
-            onChange={this.handlePasswordInputField}
+            onChange={this.handleChange}
           ></input>
           <button form='loginForm' type='submit' value='Submit'>
             Submit
