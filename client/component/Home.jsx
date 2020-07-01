@@ -5,7 +5,7 @@ import { withRouter, Link } from 'react-router-dom';
 
 class Home extends Component {
   renderPage() {
-    const { currentUser } = this.props;
+    const { currentUser, addCurrentUser, history } = this.props;
 
     if (currentUser.name) {
       return (
@@ -14,7 +14,7 @@ class Home extends Component {
         </div>
       );
     } else {
-      return <Login addCurrentUser={this.props.addCurrentUser} history={this.props.history} />;
+      return <Login addCurrentUser={addCurrentUser} history={history} />;
     }
   }
 
